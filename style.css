@@ -1,10 +1,13 @@
 * {
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 :root {
   --deskLeft: 50%;
   --deskTop: 470px;
+  --ballLeft: 250px;
+  --ballTop: 200px;
 }
 
 body {
@@ -39,4 +42,76 @@ body {
   left: var(--deskLeft);
   top: var(--deskTop);
   transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.walls {
+  border: 1px solid red;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.wall {
+  width: 50px;
+  height: 10px;
+  background: linear-gradient(to right, #ffe259, #ffa751);
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.wall:nth-child(8n) {
+  margin-right: 0px;
+}
+
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  left: var(--ballLeft);
+  top: var(--ballTop);
+  background: linear-gradient(#004ff9, #fff94c);
+}
+
+.top-wall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  border: 1px solid red;
+}
+
+.bottom-wall {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  border: 1px solid red;
+}
+
+.left-wall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  border: 1px solid red;
+}
+
+.right-wall {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  border: 1px solid red;
 }

@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     leftWall: document.querySelector(".left-wall"),
     rightWall: document.querySelector(".right-wall"),
     bottomWall: document.querySelector(".bottom-wall"),
+    scoreEleme: document.querySelector(".Score"),
+    overElement: document.querySelector(".over"),
     Walls: [],
   };
   let styleRoot = document.querySelector(":root");
@@ -15,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let gameHeight = elements.Game.getBoundingClientRect().height;
   let wallLength = 40;
   let enableUpdate = true;
+  let Score = 0;
   let ballPhisics = {
     x: getStyleProperty("--ballLeft"),
     y: getStyleProperty("--ballTop"),
@@ -32,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!enableUpdate) {
       return;
     }
+    checkGameOver();
     ballCatchDask();
-
     requestAnimationFrame(update);
   }
   function defData() {
@@ -106,12 +109,30 @@ document.addEventListener("DOMContentLoaded", () => {
   function crashWall(id) {
     elements.Walls.forEach((item) => {
       if (parseInt(item.getAttribute("data")) == id) {
-        console.log("item");
+        if (item.classList.contains("disable")) {
+          return;
+        }
+        item.classList.add("disable");
+        if (Score % 5 == 0) {
+          ballPhisics.speed = ballPhisics.speed + 1;
+          ballPhisics.vx = ballPhisics.speed;
+          ballPhisics.vy = ballPhisics.speed;
+        }
+        ballPhisics.vx *= 1;
+        ballPhisics.vy *= -1;
+        Score++;
+        elements.scoreEleme.textContent = `Score ${Score}`;
+        if (Score == wallLength) {
+          gameWin();
+        }
       }
     });
   }
   function mouseMove() {
     elements.Game.addEventListener("mousemove", (e) => {
+      if (!enableUpdate) {
+        return;
+      }
       setStyleProperty("--deskLeft", `${e.offsetX}px`);
     });
   }
@@ -129,6 +150,25 @@ document.addEventListener("DOMContentLoaded", () => {
       elements.Walls.push(elem);
       elements.wallContainer.appendChild(elem);
     }
+  }
+  function checkGameOver() {
+    if (
+      collision(
+        elements.Ball.getBoundingClientRect(),
+        elements.bottomWall.getBoundingClientRect()
+      )
+    ) {
+      gameOver();
+    }
+  }
+  function gameOver() {
+    enableUpdate = false;
+    elements.overElement.style.display = "block";
+  }
+  function gameWin() {
+    enableUpdate = false;
+    elements.overElement.textContent = "You Win";
+    elements.overElement.style.display = "block";
   }
   function collision(rect1, rect2) {
     if (

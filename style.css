@@ -46,7 +46,6 @@ body {
 }
 
 .walls {
-  border: 1px solid red;
   width: 70%;
   margin: 0 auto;
   margin-top: 60px;
@@ -86,7 +85,6 @@ body {
   left: 0;
   width: 100%;
   height: 1px;
-  border: 1px solid red;
 }
 
 .bottom-wall {
@@ -95,7 +93,6 @@ body {
   left: 0;
   width: 100%;
   height: 1px;
-  border: 1px solid red;
 }
 
 .left-wall {
@@ -104,7 +101,6 @@ body {
   left: 0;
   width: 1px;
   height: 100%;
-  border: 1px solid red;
 }
 
 .right-wall {
@@ -113,5 +109,26 @@ body {
   right: 0;
   width: 1px;
   height: 100%;
-  border: 1px solid red;
+}
+
+.disable {
+  opacity: 0;
+}
+
+.Score {
+  color: #ffe259;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 21px;
+}
+
+.over {
+  color: #93f9b9;
+  font-size: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 200px;
+  position: absolute;
+  display: none;
 }

@@ -113,6 +113,19 @@ body {
 
 .disable {
   opacity: 0;
+  animation: break;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes break {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .Score {
